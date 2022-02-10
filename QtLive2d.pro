@@ -3,6 +3,7 @@ QT       += core gui opengl openglwidgets
 greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
 
 CONFIG += c++17
+TARGET = Sample
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -48,40 +49,40 @@ HEADERS += \
     Framework/src/Rendering/OpenGL/CubismOffscreenSurface_OpenGLES2.hpp \
     Framework/src/Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp \
     Framework/src/Rendering/OpenGL/openglhelper.hpp \
-    Live2d/LAppAllocator.hpp \
-    Live2d/LAppDefine.hpp \
-    Live2d/LAppDelegate.hpp \
-    Live2d/LAppLive2DManager.hpp \
-    Live2d/LAppModel.hpp \
-    Live2d/LAppPal.hpp \
-    Live2d/LAppSprite.hpp \
-    Live2d/LAppTextureManager.hpp \
-    Live2d/LAppView.hpp \
-    Live2d/LAppWavFileHandler.hpp \
-    Live2d/QLive2dWidget.hpp \
-    Live2d/TouchManager.hpp \
-    Live2d/openglhelper.hpp \
-    QtLive2d/mainwindow.h
+    QtLive2d/LAppAllocator.hpp \
+    QtLive2d/LAppDefine.hpp \
+    QtLive2d/LAppDelegate.hpp \
+    QtLive2d/LAppLive2DManager.hpp \
+    QtLive2d/LAppModel.hpp \
+    QtLive2d/LAppPal.hpp \
+    QtLive2d/LAppSprite.hpp \
+    QtLive2d/LAppTextureManager.hpp \
+    QtLive2d/LAppView.hpp \
+    QtLive2d/LAppWavFileHandler.hpp \
+    QtLive2d/QLive2dWidget.hpp \
+    QtLive2d/TouchManager.hpp \
+    QtLive2d/openglhelper.hpp \
+    Sample/mainwindow.h
 
 SOURCES += \
     Framework/src/Rendering/CubismRenderer.cpp \
     Framework/src/Rendering/OpenGL/CubismOffscreenSurface_OpenGLES2.cpp \
     Framework/src/Rendering/OpenGL/CubismRenderer_OpenGLES2.cpp \
-    Live2d/LAppAllocator.cpp \
-    Live2d/LAppDefine.cpp \
-    Live2d/LAppDelegate.cpp \
-    Live2d/LAppLive2DManager.cpp \
-    Live2d/LAppModel.cpp \
-    Live2d/LAppPal.cpp \
-    Live2d/LAppSprite.cpp \
-    Live2d/LAppTextureManager.cpp \
-    Live2d/LAppView.cpp \
-    Live2d/LAppWavFileHandler.cpp \
-    Live2d/QLive2dWidget.cpp \
-    Live2d/TouchManager.cpp \
-    QtLive2d/main.cpp \
-    QtLive2d/mainwindow.cpp
+    QtLive2d/LAppAllocator.cpp \
+    QtLive2d/LAppDefine.cpp \
+    QtLive2d/LAppDelegate.cpp \
+    QtLive2d/LAppLive2DManager.cpp \
+    QtLive2d/LAppModel.cpp \
+    QtLive2d/LAppPal.cpp \
+    QtLive2d/LAppSprite.cpp \
+    QtLive2d/LAppTextureManager.cpp \
+    QtLive2d/LAppView.cpp \
+    QtLive2d/LAppWavFileHandler.cpp \
+    QtLive2d/QLive2dWidget.cpp \
+    QtLive2d/TouchManager.cpp \
+    Sample/main.cpp \
+    Sample/mainwindow.cpp
 
 FORMS += \
-    QtLive2d/mainwindow.ui
+    Sample/mainwindow.ui
 
