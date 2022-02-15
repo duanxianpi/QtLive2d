@@ -22,7 +22,7 @@
 ## Introduction
 QtLive2d is a Qt-based Live2d widget, it is modified from the [official Live2d Sample](https://github.com/Live2D/CubismNativeSamples). Unlike the official examples, QtLive2d uses QOpenGLWidget and QOpenGLFunctions provided by Qt instead of glfw and glew. This makes it easy to combine with any Qt Gui software.
 
-**Thanks [6ziv](https://github.com/6ziv) for your blogs and projects. They have helped me a lot on this project**
+**Thanks [@6ziv](https://github.com/6ziv) for your blogs and projects. They have helped me a lot on this project**
 ## Feature
 * Easy to use
 * Using OpenGL instead of WebGL
