@@ -35,7 +35,37 @@ QtLive2d is a Qt-based Live2d widget, it is modified from the [official Live2d S
 We provide a sample application called Sample to show you how to use it.
 [![HUSmi4.md.png](https://s4.ax1x.com/2022/02/11/HUSmi4.md.png)](https://imgtu.com/i/HUSmi4)
 
-## Build
+## Build Instructions
+### Project Structure
+```
+│   QtLive2d.pro
+│
+└───src
+    ├───Core
+    │
+    ├───dll
+    │       libLive2DCubismCore.so
+    │
+    ├───Framework
+    │       Framework.pro
+    │
+    ├───lib
+    │
+    └───Sample
+        │   Sample.pro
+        │
+        ├───QtLive2dWidget
+        │
+        └───Resources
+```
+Here is the basic structure for QtLive2d. To build the Sample, we just need to build the main project `QtLive2d.pro`. It help us control the compile processing. 
+1. Compile Framework 
+2. Copy `Framework.lib` to the lib file. 
+3. Compile Sample.
+
+Folder `Core` are from CubismNativeSamples. All the library is pre-compiled.
+
+## Usage in your program
 ### Dependency
 * Live2DCubismCore.lib
 * Framework.lib
@@ -43,15 +73,14 @@ We provide a sample application called Sample to show you how to use it.
 * User32
 * Glu32
 
-### Usage
-1. **Please use MSVC 2017 or 2019! and std C++ 17**
+### Steps to merge QtLive2d into your program 
+1. For Win32 **Please use MSVC 2017 or 2019! and std C++ 17**
 1. To use QtLive2d in your program, you need to add Floder QtLive2d, Framework, thirdParty and Core into you project.
 2. Add includepath and dependpath in `pro` file
     ```pro
     INCLUDEPATH += $$PWD/Core/include
     INCLUDEPATH += $$PWD/Framework/src
     INCLUDEPATH += $$PWD/thirdParty/stb
-    DEPENDPATH += $$PWD/../dll
     ```
 3. Define flags in `pro` file
     ```pro
@@ -59,7 +88,7 @@ We provide a sample application called Sample to show you how to use it.
     DEFINES += _WINDOWS
     DEFINES += CSM_TARGET_WIN_GL
     ```
-5. Compiling Framework and add Framework.lib into `pro` file. 
+5. Add Framework.lib into `pro` file. 
 6. Add other libs into `pro` file. 
    ```pro
     CONFIG += debug_and_release
