@@ -75,9 +75,9 @@ Folder `Core` are from CubismNativeSamples. All the library is pre-compiled.
 ### Dependency
 * Live2DCubismCore.lib
 * Framework.lib
-* OpenGL32
-* User32
-* Glu32
+* OpenGL32 (Only for Win32)
+* User32 (Only for Win32)
+* Glu32 (Only for Win32)
 
 ### Steps to merge QtLive2d into your program 
 1. For Win32 **Please use MSVC 2017 or 2019! and std C++ 17**
