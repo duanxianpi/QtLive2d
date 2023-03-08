@@ -64,7 +64,7 @@ Running on Ubuntu (xcfe4):
         │
         └───Resources
 ```
-Here is the basic structure for QtLive2d. To build the Sample, we just need to build the main project `QtLive2d.pro`. It help us control the compile processing. 
+Here is the basic structure for QtLive2d. To build the Sample, we just need to build the main project `QtLive2d.pro`. It help us automatically finish the compile processing. 
 1. Compile Framework 
 2. Copy `Framework.lib` to the lib file. 
 3. Compile Sample.
@@ -120,11 +120,11 @@ Folder `Core` are from CubismNativeSamples. All the library is pre-compiled.
    ```
 
 7. For Win32, Please the following as well
-  ```pro
-    LIBS += -lOpenGL32
-    LIBS += -lUser32
-    LIBS += -lGlu32
-  ```
+    ```pro
+      LIBS += -lOpenGL32
+      LIBS += -lUser32
+      LIBS += -lGlu32
+    ```
   
 8. QLive2dWidget is a subclass of QOpenGLWidget, which can be used directly or be promoted in the Qt Designer.
 9. To use QOpenGLWidget in Qt, you need add extra moudules.
