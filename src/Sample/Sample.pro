@@ -15,7 +15,7 @@ INCLUDEPATH += $$PWD/QtLive2dWidget/thirdParty/stb
 
 CONFIG += debug_and_release
 linux-g++* {
-    message(Compling with win32-g++)
+    message(Compling with linux-g++)
     CONFIG(debug, debug|release){
         message(Debug build)
         LIBS += -L$$PWD/../lib/Linux -lFrameworkd
@@ -36,7 +36,7 @@ linux-g++* {
 }
 
 win32-msvc*{
-    message(Compling with msvc)
+    message(Compling with win32-msvc)
     CONFIG(debug, debug|release){
         message(Debug build)
         LIBS += -L$$PWD/../lib/Win32 -lLive2DCubismCore_MDd
