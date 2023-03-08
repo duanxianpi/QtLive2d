@@ -29,12 +29,18 @@ QtLive2d is a Qt-based Live2d widget, it is modified from the [official Live2d S
 * Less resource consumption
 * Support Live2d mouse events
 * Support transparent background
-* CrossPlatform (Qt is CrossPlatform, haven't test on other platform yet)
+* CrossPlatform
 
 ## Sample
 We provide a sample application called Sample to show you how to use it.
-[![HUSmi4.md.png](https://s4.ax1x.com/2022/02/11/HUSmi4.md.png)](https://imgtu.com/i/HUSmi4)
 
+Running on Win10:
+
+[![Running on Win10](https://s4.ax1x.com/2022/02/11/HUSmi4.md.png)](https://imgtu.com/i/HUSmi4)
+
+Running on Ubuntu (xcfe4):
+
+[![Running on xcfe4](https://s1.ax1x.com/2023/03/08/ppe7Pkn.md.png)](https://imgse.com/i/ppe7Pkn)
 ## Build Instructions
 ### Project Structure
 ```
@@ -82,44 +88,55 @@ Folder `Core` are from CubismNativeSamples. All the library is pre-compiled.
     INCLUDEPATH += $$PWD/Framework/src
     INCLUDEPATH += $$PWD/thirdParty/stb
     ```
-3. Define flags in `pro` file
-    ```pro
-    DEFINES += WIN32
-    DEFINES += _WINDOWS
-    DEFINES += CSM_TARGET_WIN_GL
-    ```
 5. Add Framework.lib into `pro` file. 
-6. Add other libs into `pro` file. 
    ```pro
     CONFIG += debug_and_release
     CONFIG(debug, debug|release){
       message(Debug build)
-      LIBS += -L$$PWD/lib/ -lLive2DCubismCore_MDd
       LIBS += -L$$PWD/lib/ -lFrameworkd
 
     }
 
     CONFIG(release, debug|release){
       message(Release build)
-      LIBS += -L$$PWD/lib/ -lLive2DCubismCore_MD
       LIBS += -L$$PWD/lib/ -lFramework
 
     }
+   ```
+6. Add Live2DCubismCore lib into `pro` file. 
+   ```pro
+    CONFIG += debug_and_release
+    CONFIG(debug, debug|release){
+      message(Debug build)
+      LIBS += -L$$PWD/lib/ -lLive2DCubismCore_MDd
+
+    }
+
+    CONFIG(release, debug|release){
+      message(Release build)
+      LIBS += -L$$PWD/lib/ -lLive2DCubismCore_MD
+
+    }
+   ```
+
+7. For Win32, Please the following as well
+  ```pro
     LIBS += -lOpenGL32
     LIBS += -lUser32
     LIBS += -lGlu32
-   ```
+  ```
+  
 8. QLive2dWidget is a subclass of QOpenGLWidget, which can be used directly or be promoted in the Qt Designer.
 9. To use QOpenGLWidget in Qt, you need add extra moudules.
     ```pro
-    QT       += core gui opengl openglwidgets
+    QT       += core gui opengl
     greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
     ```
 11. Define you model path in `LAppDefine.cpp`.
 12. Enjoy it!
 
 ## What's Next?
-- [ ] Cross Platform
+- [x] Cross Platform
 
 ## License
 Copyright (C) 2022 duanxianpi
