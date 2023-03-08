@@ -8,7 +8,7 @@ CONFIG += staticlib
 INCLUDEPATH += .
 INCLUDEPATH += $$PWD/src
 INCLUDEPATH += $$PWD/../Core/include
-QT       += core opengl openglwidgets
+QT       += core opengl
 
 LIBS += -lGlu32
 LIBS += -lOpenGL32
@@ -31,10 +31,7 @@ linux-g++* {
         LIBS += -L$$PWD/../lib/Linux -lLive2DCubismCore
 
     }
-
-    DEFINES += WIN32
-    DEFINES += _WINDOWS
-    DEFINES += CSM_TARGET_WIN_GL
+    DEFINES += CSM_TARGET_LINUX_GL
 }
 
 win32-msvc*{

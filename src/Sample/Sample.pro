@@ -1,4 +1,4 @@
-QT       += core gui opengl openglwidgets
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
 
@@ -12,11 +12,6 @@ TARGET = Sample
 INCLUDEPATH += $$PWD/../Core/include
 INCLUDEPATH += $$PWD/../Framework/src
 INCLUDEPATH += $$PWD/QtLive2dWidget/thirdParty/stb
-
-
-DEFINES += WIN32
-DEFINES += _WINDOWS
-DEFINES += CSM_TARGET_WIN_GL
 
 CONFIG += debug_and_release
 linux-g++* {
@@ -36,6 +31,8 @@ linux-g++* {
         LIBS += -L$$PWD/../lib/Linux -lLive2DCubismCore
 
     }
+
+    DEFINES += CSM_TARGET_LINUX_GL
 }
 
 win32-msvc*{
@@ -53,11 +50,16 @@ win32-msvc*{
         LIBS += -L$$PWD/../lib/Win32 -lFramework
 
     }
-}
 
-LIBS += -lOpenGL32
-LIBS += -lUser32
-LIBS += -lGlu32
+    DEFINES += WIN32
+    DEFINES += _WINDOWS
+    DEFINES += CSM_TARGET_WIN_GL
+    QT += openglwidgets
+
+    LIBS += -lOpenGL32
+    LIBS += -lUser32
+    LIBS += -lGlu32
+}
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

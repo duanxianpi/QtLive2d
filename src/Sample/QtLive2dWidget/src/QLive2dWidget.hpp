@@ -1,6 +1,6 @@
 #ifndef QQGLWIDGET_H
 #define QQGLWIDGET_H
-#include <QtOpenGLWidgets/QOpenGLWidget>
+#include <QOpenGLWidget>
 #include <QOpenGLFunctions>
 #include <QElapsedTimer>
 

@@ -4,7 +4,10 @@
 #include "QtLive2dWidget/src/LAppLive2DManager.hpp"
 #include "QtLive2dWidget/src/LAppDefine.hpp"
 #include <QLabel>
+
+#ifdef WIN32
 #include <Windows.h>
+#endif
 
 using namespace LAppDefine;
 

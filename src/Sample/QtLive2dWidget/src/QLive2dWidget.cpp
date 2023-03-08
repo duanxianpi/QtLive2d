@@ -3,7 +3,11 @@
 #include "openglhelper.hpp"
 #include "LAppDelegate.hpp"
 #include <QTimer>
-#include "Windows.h"
+
+#ifdef WIN32
+#include <Windows.h>
+#endif
+
 
 QLive2dWidget::QLive2dWidget(QWidget *parent):
     QOpenGLWidget(parent)

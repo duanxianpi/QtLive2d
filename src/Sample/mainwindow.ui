@@ -85,7 +85,7 @@
   <customwidget>
    <class>QLive2dWidget</class>
    <extends>QOpenGLWidget</extends>
-   <header>.\QtLive2dWidget\src\qlive2dwidget.hpp</header>
+   <header>./QtLive2dWidget/src/QLive2dWidget.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
