@@ -10,9 +10,6 @@ INCLUDEPATH += $$PWD/src
 INCLUDEPATH += $$PWD/../Core/include
 QT       += core opengl
 
-LIBS += -lGlu32
-LIBS += -lOpenGL32
-
 linux-g++* {
     CONFIG(debug, debug|release){
         message(Debug build)
@@ -58,8 +55,9 @@ win32-msvc*{
     DEFINES += CSM_TARGET_WIN_GL
 }
 
-
-
+win32-g++*{
+    error(Please use MSVC on Win32)
+}
 
 # You can make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
