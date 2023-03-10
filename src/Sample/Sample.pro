@@ -33,6 +33,7 @@ linux-g++* {
     }
 
     DEFINES += CSM_TARGET_LINUX_GL
+    QT += openglwidgets
 }
 
 win32-msvc*{
