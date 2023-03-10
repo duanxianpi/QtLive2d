@@ -127,10 +127,10 @@ Folder `Core` are from CubismNativeSamples. All the library is pre-compiled.
     ```
   
 8. QLive2dWidget is a subclass of QOpenGLWidget, which can be used directly or be promoted in the Qt Designer.
-9. To use QOpenGLWidget in Qt, you need add extra moudules.
+9. To use QOpenGLWidget in **Qt 6**, you need add extra moudules openglwidgets
     ```pro
-    QT       += core gui opengl
-    greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
+    QT       += core gui opengl widgets
+    greaterThan(QT_MAJOR_VERSION, 5): QT += openglwidgets
     ```
 11. Define you model path in `LAppDefine.cpp`.
 12. Enjoy it!
