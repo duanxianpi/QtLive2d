@@ -1,6 +1,11 @@
-QT       += core gui opengl
+QT       += core gui opengl widgets
 
-greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
+# In Qt6 to use QOpenglWidget, we need add QT += openglwidgets.
+greaterThan(QT_MAJOR_VERSION, 5){
+    message(Building with Qt6 or Higher)
+    QT += openglwidgets
+}
+
 
 CONFIG += c++17
 TARGET = Sample
@@ -33,7 +38,6 @@ linux-g++* {
     }
 
     DEFINES += CSM_TARGET_LINUX_GL
-    QT += openglwidgets
 }
 
 win32-msvc*{
@@ -55,11 +59,14 @@ win32-msvc*{
     DEFINES += WIN32
     DEFINES += _WINDOWS
     DEFINES += CSM_TARGET_WIN_GL
-    QT += openglwidgets
 
     LIBS += -lOpenGL32
     LIBS += -lUser32
     LIBS += -lGlu32
+}
+
+win32-g++*{
+    error(Please use MSVC on Win32)
 }
 
 # Default rules for deployment.
