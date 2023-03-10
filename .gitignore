@@ -2,3 +2,5 @@
 ./QtLive2d.pro.user
 ./src/Sample/Sample.pro.user
 ./src/Framework/Framework.pro.user
+./src/lib/Frameworkd.lib
+./src/lib/Framework.lib
