@@ -115,37 +115,6 @@ HEADERS += src/CubismCdiJson.hpp \
            src/Utils/CubismString.hpp \
            src/Rendering/OpenGL/CubismOffscreenSurface_OpenGLES2.hpp \
            src/Rendering/OpenGL/CubismRenderer_OpenGLES2.hpp \
-           src/CubismFramework.hpp \
-           src/Type/csmVector.hpp \
-           src/Utils/CubismDebug.hpp \
-           src/Type/csmMap.hpp \
-           src/Type/csmString.hpp \
-           src/Type/CubismBasicType.hpp \
-           src/Math/CubismMatrix44.hpp \
-           src/Model/CubismModel.hpp \
-           src/Rendering/CubismRenderer.hpp \
-           src/Id/CubismId.hpp \
-           src/ICubismModelSetting.hpp \
-           src/Utils/CubismJson.hpp \
-           src/Id/CubismIdManager.hpp \
-           src/Math/CubismVector2.hpp \
-           src/Math/CubismMath.hpp \
-           src/CubismJsonHolder.hpp \
-           src/Utils/CubismString.hpp \
-           src/Effect/CubismPose.hpp \
-           src/Effect/CubismEyeBlink.hpp \
-           src/Effect/CubismBreath.hpp \
-           src/Math/CubismModelMatrix.hpp \
-           src/Math/CubismTargetPoint.hpp \
-           src/Model/CubismMoc.hpp \
-           src/Motion/CubismMotionManager.hpp \
-           src/Motion/CubismExpressionMotion.hpp \
-           src/Physics/CubismPhysics.hpp \
-           src/Model/CubismModelUserData.hpp \
-           src/Motion/CubismMotion.hpp \
-           src/Model/CubismUserModel.hpp \
-           src/Type/csmRectF.hpp \
-           src/CubismFrameworkConfig.hpp
 
 SOURCES += src/CubismCdiJson.cpp \
            src/CubismDefaultParameterId.cpp \

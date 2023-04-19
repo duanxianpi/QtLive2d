@@ -26,6 +26,65 @@ class CubismModel
 {
     friend class CubismMoc;
 public:
+
+    /**
+     * @brief テクスチャの色をRGBAで扱うための構造体
+    */
+    struct DrawableColorData
+    {
+        /**
+         * @brief   コンストラクタ
+         */
+        DrawableColorData()
+            : IsOverwritten(false)
+            , Color() {};
+
+        /**
+         * @brief   コンストラクタ
+         */
+        DrawableColorData(csmBool isOverwritten, Rendering::CubismRenderer::CubismTextureColor color)
+            : IsOverwritten(isOverwritten)
+            , Color(color) {};
+
+        /**
+         * @brief   デストラクタ
+         */
+        virtual ~DrawableColorData() {};
+
+        csmBool IsOverwritten;
+        Rendering::CubismRenderer::CubismTextureColor Color;
+
+    };  // DrawableColorData
+
+    /**
+     * @brief テクスチャのカリング設定を管理するための構造体
+    */
+    struct DrawableCullingData
+    {
+        /**
+         * @brief   コンストラクタ
+         */
+        DrawableCullingData()
+            : IsOverwritten(false)
+            , IsCulling(0) {};
+
+        /**
+         * @brief   コンストラクタ
+         */
+        DrawableCullingData(csmBool isOverwritten, csmInt32 isCulling)
+            : IsOverwritten(isOverwritten)
+            , IsCulling(isCulling) {};
+
+        /**
+         * @brief   デストラクタ
+         */
+        virtual ~DrawableCullingData() {};
+
+        csmBool IsOverwritten;
+        csmInt32 IsCulling;
+
+    };  // DrawableCullingData
+
     /**
      * @brief モデルのパラメータの更新
      *
@@ -155,6 +214,16 @@ public:
      * @return パラメータの個数
      */
     csmInt32    GetParameterCount() const;
+
+    /**
+     * @brief パラメータの種類の取得
+     *
+     * パラメータの種類を取得する。
+     *
+     * @return Core::csmParameterType_Normal -> 通常のパラメータ
+     *         Core::csmParameterType_BlendShape -> ブレンドシェイプパラメータ
+     */
+    Core::csmParameterType GetParameterType(csmUint32 parameterIndex) const;
 
     /**
      * @brief パラメータの最大値の取得
@@ -311,6 +380,9 @@ public:
     const csmInt32*     GetDrawableRenderOrders() const;
 
     /**
+     * @deprecated
+     * 関数名が誤っていたため、代替となる getDrawableTextureIndex を追加し、この関数は非推奨となりました。
+     *
      * @brief Drawableのテクスチャインデックスリストの取得
      *
      * Drawableのテクスチャインデックスリストを取得する。
@@ -319,6 +391,16 @@ public:
      * @return  Drawableのテクスチャインデックスリスト
      */
     csmInt32            GetDrawableTextureIndices(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief Drawableのテクスチャインデックスリストの取得
+     *
+     * Drawableのテクスチャインデックスを取得する。
+     *
+     * @param[in]   drawableIndex   Drawableのインデックス
+     * @return  Drawableのテクスチャインデックス
+     */
+    csmInt32            GetDrawableTextureIndex(csmInt32 drawableIndex) const;
 
     /**
      * @brief Drawableの頂点インデックスの個数の取得
@@ -391,14 +473,34 @@ public:
     csmFloat32                  GetDrawableOpacity(csmInt32 drawableIndex) const;
 
     /**
-     * @brief Drawableのカリング情報の取得
+     * @brief Drawableの乗算色の取得
      *
-     * Drawableのカリング情報を取得する。
+     * Drawableの乗算色を取得する。
      *
      * @param[in]   drawableIndex   Drawableのインデックス
-     * @return  Drawableのカリング情報
+     * @return  Drawableの乗算色
      */
-    csmInt32                    GetDrawableCulling(csmInt32 drawableIndex) const;
+    Core::csmVector4 GetDrawableMultiplyColor(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief Drawableのスクリーン色の取得
+     *
+     * Drawableのスクリーン色を取得する。
+     *
+     * @param[in]   drawableIndex   Drawableのインデックス
+     * @return  Drawableのスクリーン色
+     */
+    Core::csmVector4 GetDrawableScreenColor(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief Drawableの親パーツのインデックスの取得
+     *
+     * Drawableの親パーツのインデックスを取得する。
+     *
+     * @param[in]   drawableIndex   Drawableのインデックス
+     * @return drawableの親パーツのインデックス
+     */
+    csmInt32 GetDrawableParentPartIndex(csmUint32 drawableIndex) const;
 
     /**
      * @brief Drawableのブレンドモードの取得
@@ -489,6 +591,17 @@ public:
     csmBool                  GetDrawableDynamicFlagVertexPositionsDidChange(csmInt32 drawableIndex) const;
 
     /**
+    * @brief Drawableの乗算色・スクリーン色の変化情報の取得
+    *
+    * 直近のCubismModel::Update関数でDrawableの乗算色・スクリーン色が変化したかを取得する。
+    *
+    * @param[in]   drawableIndex   Drawableのインデックス
+    * @retval  true    Drawableの乗算色・スクリーン色が直近のCubismModel::Update関数で変化した
+    * @retval  false   Drawableの乗算色・スクリーン色が直近のCubismModel::Update関数で変化していない
+    */
+    csmBool                  GetDrawableDynamicFlagBlendColorDidChange(csmInt32 drawableIndex) const;
+
+    /**
      * @brief Drawableのクリッピングマスクリストの取得
      *
      * Drawableのクリッピングマスクリストを取得する。
@@ -529,6 +642,135 @@ public:
      * パラメータを保存する。
      */
     void    SaveParameters();
+
+    /**
+     * @brief   リストから乗算色を取得する
+     */
+    Rendering::CubismRenderer::CubismTextureColor GetMultiplyColor(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief   リストからスクリーン色を取得する
+     */
+    Rendering::CubismRenderer::CubismTextureColor GetScreenColor(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief   乗算色を設定する
+     */
+    void SetMultiplyColor(csmInt32 drawableIndex, const Rendering::CubismRenderer::CubismTextureColor& color);
+
+    /**
+     * @brief   乗算色を設定する
+     */
+    void SetMultiplyColor(csmInt32 drawableIndex, csmFloat32 r, csmFloat32 g, csmFloat32 b, csmFloat32 a = 1.0f);
+
+    /**
+     * @brief   スクリーン色を設定する
+     */
+    void SetScreenColor(csmInt32 drawableIndex, const Rendering::CubismRenderer::CubismTextureColor& color);
+
+    /**
+     * @brief   スクリーン色を設定する
+     */
+    void SetScreenColor(csmInt32 drawableIndex, csmFloat32 r, csmFloat32 g, csmFloat32 b, csmFloat32 a = 1.0f);
+
+    /**
+     * @brief SDKからモデル全体の乗算色を上書きするか。
+     *
+     * @retval  true    ->  SDK上の色情報を使用
+     * @retval  false   ->  モデルの色情報を使用
+     */
+    csmBool GetOverwriteFlagForModelMultiplyColors() const;
+
+    /**
+     * @brief SDKからモデル全体のスクリーン色を上書きするか。
+     *
+     * @retval  true    ->  SDK上の色情報を使用
+     * @retval  false   ->  モデルの色情報を使用
+     */
+    csmBool GetOverwriteFlagForModelScreenColors() const;
+
+    /**
+     * @brief SDKからモデル全体の乗算色を上書きするかをセットする
+     *        SDK上の色情報を使うならtrue、モデルの色情報を使うならfalse
+     */
+    void SetOverwriteFlagForModelMultiplyColors(csmBool value);
+
+    /**
+     * @brief SDKからモデル全体のスクリーン色を上書きするかをセットする
+     *        SDK上の色情報を使うならtrue、モデルの色情報を使うならfalse
+     */
+    void SetOverwriteFlagForModelScreenColors(csmBool value);
+
+    /**
+     * @brief SDKからdrawableの乗算色を上書きするか。
+     *
+     * @retval  true    ->  SDK上の色情報を使用
+     * @retval  false   ->  モデルの色情報を使用
+     */
+    csmBool GetOverwriteFlagForDrawableMultiplyColors(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief SDKからdrawableのスクリーン色を上書きするか。
+     *
+     * @retval  true    ->  SDK上の色情報を使用
+     * @retval  false   ->  モデルの色情報を使用
+     */
+    csmBool GetOverwriteFlagForDrawableScreenColors(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief SDKからdrawableの乗算色を上書きするかをセットする
+     *        SDK上の色情報を使うならtrue、モデルの色情報を使うならfalse
+     */
+    void SetOverwriteFlagForDrawableMultiplyColors(csmUint32 drawableIndex, csmBool value);
+
+    /**
+     * @brief SDKからdrawableのスクリーン色を上書きするかをセットする
+     *        SDK上の色情報を使うならtrue、モデルの色情報を使うならfalse
+     */
+    void SetOverwriteFlagForDrawableScreenColors(csmUint32 drawableIndex, csmBool value);
+
+    /**
+     * @brief Drawableのカリング情報の取得
+     *
+     * Drawableのカリング情報を取得する。
+     *
+     * @param[in]   drawableIndex   Drawableのインデックス
+     * @return  Drawableのカリング情報
+     */
+    csmInt32 GetDrawableCulling(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief   Drawableのカリング情報を設定する
+     */
+    void SetDrawableCulling(csmInt32 drawableIndex, csmInt32 isCulling);
+
+    /**
+     * @brief SDKからモデル全体のカリング設定を上書きするか。
+     *
+     * @retval  true    ->  SDK上のカリング設定を使用
+     * @retval  false   ->  モデルのカリング設定を使用
+     */
+    csmBool GetOverwriteFlagForModelCullings() const;
+
+    /**
+     * @brief SDKからモデル全体のカリング設定を上書きするかをセットする
+     *        SDK上のカリング設定を使うならtrue、モデルのカリング設定を使うならfalse
+     */
+    void SetOverwriteFlagForModelCullings(csmBool value);
+
+    /**
+     * @brief SDKからdrawableのカリング設定を上書きするか。
+     *
+     * @retval  true    ->  SDK上のカリング設定を使用
+     * @retval  false   ->  モデルのカリング設定を使用
+     */
+    csmBool GetOverwriteFlagForDrawableCullings(csmInt32 drawableIndex) const;
+
+    /**
+     * @brief SDKからdrawableのカリング設定を上書きするかをセットする
+     *        SDK上のカリング設定を使うならtrue、モデルのカリング設定を使うならfalse
+     */
+    void SetOverwriteFlagForDrawableCullings(csmUint32 drawableIndex, csmBool value);
 
     Core::csmModel*     GetModel() const;
 
@@ -579,6 +821,12 @@ private:
     csmVector<CubismIdHandle> _parameterIds;
     csmVector<CubismIdHandle> _partIds;
     csmVector<CubismIdHandle> _drawableIds;
+    csmVector<DrawableColorData> _userScreenColors; ///< 乗算色の配列
+    csmVector<DrawableColorData> _userMultiplyColors; ///< スクリーン色の配列
+    csmVector<DrawableCullingData> _userCullings; ///< カリング設定の配列
+    csmBool _isOverwrittenModelMultiplyColors; ///< 乗算色を全て上書きするか？
+    csmBool _isOverwrittenModelScreenColors; ///< スクリーン色を全て上書きするか？
+    csmBool _isOverwrittenCullings; ///< モデルのカリング設定をすべて上書きするか？
 };
 
 }}}
