@@ -1,6 +1,6 @@
 /build
-./QtLive2d.pro.user
+./*.user
 ./src/Sample/Sample.pro.user
-./src/Framework/Framework.pro.user
-./src/lib/Frameworkd.lib
-./src/lib/Framework.lib
+./src/Framework/*.user
+./src/lib/**/Framework.lib
+./src/lib/**/Frameworkd.pdb
