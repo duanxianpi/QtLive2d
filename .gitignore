@@ -1,6 +1,6 @@
-/build
-./*.user
-./src/Sample/Sample.pro.user
-./src/Framework/*.user
-./src/lib/**/Framework.lib
-./src/lib/**/Frameworkd.pdb
+build/
+*.user
+src/Sample/Sample.pro.user
+src/Framework/*.user
+src/lib/**/Framework.lib
+src/lib/**/Frameworkd.pdb
