@@ -96,6 +96,12 @@ void LAppModel::LoadAssets(const csmChar* dir, const csmChar* fileName)
 
     SetupModel(setting);
 
+    if (_model == NULL)
+    {
+        LAppPal::PrintLog("Failed to LoadAssets().");
+        return;
+    }
+
     CreateRenderer();
 
     SetupTextures();
