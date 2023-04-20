@@ -13,7 +13,6 @@
 #include "Type/csmMap.hpp"
 #include <float.h>
 
-
 #ifdef CSM_TARGET_ANDROID_ES2
 #include <jni.h>
 #include <errno.h>
@@ -86,6 +85,11 @@ public:
      * @brief   CubismOffscreenFrameの削除
      */
     void DestroyOffscreenFrame();
+
+    /**
+     * @brief   レンダーテクスチャメンバーへのアクセッサ
+     */
+    GLuint GetRenderTexture() const;
 
     /**
      * @brief   カラーバッファメンバーへのアクセッサ
